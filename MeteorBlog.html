@@ -1,0 +1,85 @@
+<head>
+	<title>Min meteor blogg</title>
+</head>
+
+<body>
+	<div class="container">
+		{{> header}}
+
+		{{> blogPage}}
+
+		{{> footer}}
+	</div>
+</body>
+<!--Head template that changes.-->
+<template name="header">
+	<header>
+		<h1>{{header}}</h1>
+	</header>
+</template>
+
+<template name="footer">
+	<footer>
+			Denna testblogg har skapats i utvecklingssyfte för kursen <a href="http://coursepress.lnu.se/kurs/moderna-applikationsmiljoer" title="Kursens webbsida">Moderna applikationsmiljöer <span>"2DV400"</span></a>. Den har i uppgift att visa lite om realtidswebben och hur man med javascripts-ramverket <a href="http://www.meteor.com" title="Meteors webbsida">Meteor</a> kan skapa applikationer som använder sig av just detta. Vi som har skapat denna applikation heter Hans Bentlöv och Claes Tillborg och går tredje året på programmet <a href="http://coursepress.lnu.se/program/webbprogrammerare" title="Programmets webbsida">webbprogramering</a> på <a href="http://www.lnu.se" title="Linneuniversitetets webbsida">Linneuniversitetet</a> i Kalmar.
+		</footer>
+</template>
+
+<template name="blogPage">
+	
+	<aside class="three columns postLinkList">
+		<h3>Inlägg:</h3>
+		<ol>
+		{{#each postLinks}}
+			<li><a class="postLink" href="#{{_id}}">{{title}}</a></li>
+		{{/each}}
+		</ol>
+	</aside>
+
+	<section class="thirteen columns">
+		{{#each post}}
+			<div class="post" id="{{_id}}">
+				<h3>{{title}}</h3>
+				
+				<aside class="three columns alpha">
+					<dl>
+					  <dt>Publicerad:</dt>
+					    <dd>{{formatDate date}}</dd>
+					  <dt>Författare:</dt>
+					    <dd>{{userName}}</dd>
+					  <dt>Kommentarer:</dt>
+					  	<dd>{{totalComments}} kommentarer</dd>
+					</dl>
+				</aside>
+
+				<article class="ten columns omega contentWraper">
+					<p class="postContent">{{content}}</p>
+				</article>
+				<br class="clear" />
+				<div class="commentList">
+					<h4>Kommentarer:</h4>
+					{{#each comments}}
+						<div class="comment">
+							<p>
+								<strong>{{userName}}</strong>: {{content}}<span><br>
+								<em>{{formatDate date}}</em></span>
+							</p>
+						</div>
+					{{/each}}
+				</div>
+
+				<div class="commentBox">
+					<input type="text" id="addToPost_{{_id}}" placeholder="Skriv kommentar..." />
+					<input type="button" class="addComment" value="skicka"/>
+				</div>		
+
+			</div>
+		{{/each}}
+		<br class="clear" />
+		<div class="postBox">
+			<input type="text" class="addPostTitle" placeholder="Titel..." />
+			<textarea class="addPostContent" placeholder="Text..."></textarea>
+			<input type="button" class="addPost" value="skicka" />
+		</div>
+	</section>
+	<br class="clear" />
+</template>

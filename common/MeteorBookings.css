@@ -1,0 +1,20 @@
+/* CSS declarations go here */
+.active {
+  background: yellow;
+}
+
+dl {
+	font-size: smaller;
+}
+dt {
+	font-weight: bold;
+}
+dd {
+	font-style: italic;
+}
+
+.postBox {
+	margin-top: 20px;
+	padding-top: 20px;
+	border-top: 0.2em dashed gray;
+}
