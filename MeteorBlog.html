@@ -15,6 +15,7 @@
 <template name="header">
 	<header>
 		<h1>{{header}}</h1>
+
 	</header>
 </template>
 
@@ -27,6 +28,7 @@
 <template name="blogPage">
 	
 	<aside class="three columns postLinkList">
+		{{> loginButtons}}
 		<h3>Inlägg:</h3>
 		<ol>
 		{{#each postLinks}}
@@ -48,6 +50,10 @@
 					    <dd>{{userName}}</dd>
 					  <dt>Kommentarer:</dt>
 					  	<dd>{{totalComments}} kommentarer</dd>
+				  	<dt>{{#if currentUser}}
+				  		<a href="#" class="{{likeUnlike}}_link" title="{{likeUnlike}}">{{likeUnlike}}</a>
+				  	{{/if}}</dt>
+				  		<dd>{{likeCount}}</dd>
 					</dl>
 				</aside>
 
@@ -66,12 +72,12 @@
 						</div>
 					{{/each}}
 				</div>
-
+				{{#if currentUser}}
 				<div class="commentBox">
 					<input type="text" id="addToPost_{{_id}}" placeholder="Skriv kommentar..." />
 					<input type="button" class="addComment" value="skicka"/>
 				</div>		
-
+				{{/if}}
 			</div>
 		{{/each}}
 		<br class="clear" />
