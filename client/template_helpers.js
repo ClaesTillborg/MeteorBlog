@@ -49,7 +49,7 @@ Handlebars.registerHelper('likeCount', function() {
  * Checks if user has liked the post.
  */
 Handlebars.registerHelper('likeUnlike', function() {
-	if (Meteor.user() !== null) {
+	/*if (Meteor.user() !== null) {
 		var ret = "";
 		_.each(this.likes, function(like) {
 			if (like.name === Meteor.user().profile.name) {
@@ -61,5 +61,5 @@ Handlebars.registerHelper('likeUnlike', function() {
 			}
 		});
 		return ret;
-	}
+	}*/
 });
