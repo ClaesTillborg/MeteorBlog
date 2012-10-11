@@ -11,6 +11,10 @@ Template.blogPage.totalComments = function() {
 	return comments.length;
 };
 
+Template.blogPage.userComment = function() {
+	return Meteor.userId() === this.userId;
+};
+
 //--------------------------------------------------Helpers----------------------------------------------------->
 Handlebars.registerHelper('header', function() {
 //TODO: return User.findOne({_id : userId}, {fields: {name: 1}});
@@ -49,7 +53,7 @@ Handlebars.registerHelper('likeCount', function() {
  * Checks if user has liked the post.
  */
 Handlebars.registerHelper('likeUnlike', function() {
-	if (Meteor.user() !== null) {
+	/*if (Meteor.user() !== null) {
 		var ret = "";
 		_.each(this.likes, function(like) {
 			if (like.name === Meteor.user().profile.name) {
@@ -61,5 +65,5 @@ Handlebars.registerHelper('likeUnlike', function() {
 			}
 		});
 		return ret;
-	}
+	}*/
 });
