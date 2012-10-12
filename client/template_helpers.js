@@ -50,16 +50,8 @@ Handlebars.registerHelper('likeCount', function() {
  */
 Handlebars.registerHelper('likeUnlike', function() {
 	if (Meteor.user() !== null) {
+		console.log(this);
 		var ret = "";
-		_.each(this.likes, function(like) {
-			if (like.name === Meteor.user().profile.name) {
-				ret = 'Unlike';
-				return;
-			}else {
-				ret = 'Like';
-				return;
-			}
-		});
 		return ret;
 	}
 });

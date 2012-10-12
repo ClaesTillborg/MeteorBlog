@@ -2,7 +2,10 @@
   Server methods
  */
 Meteor.methods({
-});  
+  log: function() {
+    console.log("loggar lite skit");
+  }
+}) 
 
 /*
 
