@@ -14,7 +14,15 @@ dd {
 }
 
 .postBox {
+}
+
+.post {
 	margin-top: 20px;
 	padding-top: 20px;
 	border-top: 0.2em dashed gray;
+}
+.removeComment {
+	margin: 1em;
+	margin-top: 0.5em;
+	float: right;
 }

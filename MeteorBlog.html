@@ -15,6 +15,7 @@
 <template name="header">
 	<header>
 		<h1>{{header}}</h1>
+
 	</header>
 </template>
 
@@ -27,6 +28,7 @@
 <template name="blogPage">
 	
 	<aside class="three columns postLinkList">
+		{{loginButtons}}
 		<h3>Inlägg:</h3>
 		<ol>
 		{{#each postLinks}}
@@ -36,16 +38,22 @@
 	</aside>
 
 	<section class="thirteen columns">
+		{{#if currentUser}}
 		<div class="postBox">
-			<input type="text" class="addPostTitle" placeholder="Titel..." />
-			<textarea class="addPostContent" placeholder="Text..."></textarea>
+			<input type="text" id="addPostTitle" placeholder="Titel..." />
+			<textarea id="addPostContent" placeholder="Text..."></textarea>
 			<input type="button" class="addPost" value="skicka" />
 		</div>
+		{{else}}
+		<div>
+			<p>Logga in för att lägga till poster!</p>
+		</div>
+		{{/if}}
 		{{#each post}}
 			<div class="post" id="{{_id}}">
 				<h3>{{title}}</h3>
 				
-				<aside class="three columns alpha">
+				<aside class="four columns alpha">
 					<dl>
 					  <dt>Publicerad:</dt>
 					    <dd>{{formatDate date}}</dd>
@@ -53,10 +61,14 @@
 					    <dd>{{userName}}</dd>
 					  <dt>Kommentarer:</dt>
 					  	<dd>{{totalComments}} kommentarer</dd>
+				  	<dt>{{#if currentUser}}
+				  		<a href="#" class="{{likeUnlike}}_link" title="{{likeUnlike}}">{{likeUnlike}}</a>
+				  	{{/if}}</dt>
+				  		<dd>{{likeCount}}</dd>
 					</dl>
 				</aside>
 
-				<article class="ten columns omega contentWraper">
+				<article class="nine columns omega contentWraper">
 					<p class="postContent">{{content}}</p>
 				</article>
 				<br class="clear" />
@@ -64,6 +76,9 @@
 					<h4>Kommentarer:</h4>
 					{{#each comments}}
 						<div class="comment">
+							{{#if userComment}}
+							<span class="removeComment">remove</span>
+							{{/if}}
 							<p>
 								<strong>{{userName}}</strong>: {{content}}<span><br>
 								<em>{{formatDate date}}</em></span>
@@ -71,12 +86,12 @@
 						</div>
 					{{/each}}
 				</div>
-
+				{{#if currentUser}}
 				<div class="commentBox">
 					<input type="text" id="addToPost_{{_id}}" placeholder="Skriv kommentar..." />
 					<input type="button" class="addComment" value="skicka"/>
 				</div>		
-
+				{{/if}}
 			</div>
 		{{/each}}
 	</section>
