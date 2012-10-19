@@ -14,11 +14,44 @@ Template.blogPage.events({
       Posts.update({ _id: this._id}, { $addToSet: { comments: comment }});
     };
   },
+
+  'click .addPost': function() {
+    var title = document.getElementById("addPostTitle").value;
+    var content = document.getElementById("addPostContent").value;
+    if (title !== '' && content !== '') {
+      Posts.insert(
+      {
+        "title" : title,
+        "date" : new Date(),
+        "userId" : Meteor.userId(),
+        "content" : content,
+        "comments" : [],
+        "likes" : []
+      });
+    };
+    /**/
+  },
+
   'click .Like_link': function() {
   	Posts.update({ _id: this._id }, { $addToSet: { likes: { name: Meteor.user().profile.name }}});
   },
+
   'click .Unlike_link': function() {
   	Posts.update({ _id: this._id }, { $pull: { likes: { name: Meteor.user().profile.name }}});
+  },
+
+  'mouseenter .comment': function() {
+    if (this.userId === Meteor.userId()) {
+      event.target.className += " active";
+    };
+  },
+
+  'mouseleave .comment': function() {
+    event.target.className = "comment";
+  },
+
+  'click .removeComment': function() {
+    console.log(this.data);
   }
 });
 
@@ -34,6 +67,5 @@ function returnDate(d) {
 	};
 
 	return year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds;
-}
-
+};
 

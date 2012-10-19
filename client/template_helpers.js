@@ -11,6 +11,10 @@ Template.blogPage.totalComments = function() {
 	return comments.length;
 };
 
+Template.blogPage.userComment = function() {
+	return Meteor.userId() === this.userId;
+};
+
 //--------------------------------------------------Helpers----------------------------------------------------->
 Handlebars.registerHelper('header', function() {
 //TODO: return User.findOne({_id : userId}, {fields: {name: 1}});

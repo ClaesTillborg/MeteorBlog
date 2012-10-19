@@ -1,2 +1,2 @@
 //	Global collections
-var Posts = new Meteor.Collection("posts");
+var Rooms = new Meteor.Collection("rooms");
