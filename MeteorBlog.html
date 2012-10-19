@@ -36,6 +36,11 @@
 	</aside>
 
 	<section class="thirteen columns">
+		<div class="postBox">
+			<input type="text" class="addPostTitle" placeholder="Titel..." />
+			<textarea class="addPostContent" placeholder="Text..."></textarea>
+			<input type="button" class="addPost" value="skicka" />
+		</div>
 		{{#each post}}
 			<div class="post" id="{{_id}}">
 				<h3>{{title}}</h3>
@@ -74,12 +79,6 @@
 
 			</div>
 		{{/each}}
-		<br class="clear" />
-		<div class="postBox">
-			<input type="text" class="addPostTitle" placeholder="Titel..." />
-			<textarea class="addPostContent" placeholder="Text..."></textarea>
-			<input type="button" class="addPost" value="skicka" />
-		</div>
 	</section>
 	<br class="clear" />
 </template>
