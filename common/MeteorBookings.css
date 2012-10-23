@@ -1,6 +1,6 @@
 /* CSS declarations go here */
 .active {
-  background: yellow;
+  background: #F6F6F6;
 }
 
 dl {
@@ -13,7 +13,7 @@ dd {
 	font-style: italic;
 }
 
-.postBox {
+.comment {
 }
 
 .post {
@@ -25,4 +25,17 @@ dd {
 	margin: 1em;
 	margin-top: 0.5em;
 	float: right;
+}
+.floatRight {
+	float: right;
+}
+
+.unlike_link:hover,
+.like_link:hover {
+	text-decoration: none;
+	color: #B6B6B6;
+}
+.unlike_link,
+.like_link {
+	text-decoration: underline;
 }

@@ -2,10 +2,10 @@ Template.blogPage.events({
   'click .addComment': function() {
     var commentText = document.getElementById("addToPost_" + this._id).value;
     if (commentText != false) {
-      console.log(comment);
       document.getElementById("addToPost_" + this._id).value = "";
       var date = returnDate(new Date());
       var comment = {
+        parentId: this._id,
       	content: commentText,
       	date: date,
       	userId: Meteor.userId(),
@@ -24,6 +24,7 @@ Template.blogPage.events({
         "title" : title,
         "date" : new Date(),
         "userId" : Meteor.userId(),
+        "userName" : Meteor.user().profile.name,
         "content" : content,
         "comments" : [],
         "likes" : []
@@ -32,12 +33,12 @@ Template.blogPage.events({
     /**/
   },
 
-  'click .Like_link': function() {
-  	Posts.update({ _id: this._id }, { $addToSet: { likes: { name: Meteor.user().profile.name }}});
+  'click .like_link': function() {
+  	Posts.update({ _id: this._id }, { $addToSet: { likes: { userId: Meteor.userId(), userName: Meteor.user().profile.name }}});
   },
 
-  'click .Unlike_link': function() {
-  	Posts.update({ _id: this._id }, { $pull: { likes: { name: Meteor.user().profile.name }}});
+  'click .unlike_link': function() {
+  	Posts.update({ _id: this._id }, { $pull: { likes: { userId: Meteor.userId()}}});
   },
 
   'mouseenter .comment': function() {
@@ -51,7 +52,7 @@ Template.blogPage.events({
   },
 
   'click .removeComment': function() {
-    console.log(this.data);
+    Posts.update({_id : this.parentId}, { $pull: { comments: { date: this.date}}});
   }
 });
 

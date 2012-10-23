@@ -7,13 +7,57 @@ Template.blogPage.post = function() {
 };
 
 Template.blogPage.totalComments = function() {
-	var comments = this.comments;
-	return comments.length;
+	var comments = this.comments.length;
+	if (comments > 0) {
+		return new Handlebars.SafeString('<dt>Kommentarer:</dt><dd>'+ comments +'</dd>');
+	};
+	return "";
 };
 
 Template.blogPage.userComment = function() {
 	return Meteor.userId() === this.userId;
 };
+Template.blogPage.likeUnlike = function() {
+	var ret = '<span href="#" class="like_link" title="Gilla">Gilla</span>';
+	if(this.likes.length > 0) {
+		_.each(this.likes, function(like) {
+			if (like.userId === Meteor.userId()) {
+				ret = '<span class="unlike_link" title="Sluta gilla">Sluta gilla</span>';
+			}
+		});
+	}
+	return new Handlebars.SafeString(ret);
+};
+
+Template.blogPage.likeCount = function() {
+	var ret = "";
+	var userExists = false;
+
+	//Check if some one likes the post...
+	if(this.likes.length > 0) {
+
+		//Loop through the array of likes and check if user is one of them...
+		_.each(this.likes, function(like) {
+			if (like.userId === Meteor.userId()) {
+				userExists = true;
+			}
+		});
+
+		if(userExists) {
+			if(this.likes.length === 1) {
+				ret = "Du";
+			} else {
+				ret = "Du och " + this.likes.length + " till"
+			}
+		} else {
+			ret = this.likes.length;
+		}
+
+		ret += " gillar denna post!"
+	}
+
+	return ret;
+}
 
 //--------------------------------------------------Helpers----------------------------------------------------->
 Handlebars.registerHelper('header', function() {
@@ -29,41 +73,4 @@ Handlebars.registerHelper('formatDate', function(date) {
 	var ret = dayName + " " + date.getDate() + " " + month + " " + date.getFullYear();
 	return new Handlebars.SafeString(ret);
 
-});
-
-Handlebars.registerHelper('author', function(userId) {
-//TODO: return User.findOne({_id : userId}, {fields: {name: 1}});
-	return "Claes Tillborg";
-});
-
-Handlebars.registerHelper('likeCount', function() {
-		var likeCount = this.likes.length;
-		if (likeCount > 4) {
-			return likeCount + " likes this!";
-		}else {
-			var ret;
-			for (var i = likeCount - 1; i >= 0; i--) {
-				ret += this.likes[i].name + ", ";
-			};
-			return ret + " likes this!";
-		}
-});
-
-/**
- * Checks if user has liked the post.
- */
-Handlebars.registerHelper('likeUnlike', function() {
-	/*if (Meteor.user() !== null) {
-		var ret = "";
-		_.each(this.likes, function(like) {
-			if (like.name === Meteor.user().profile.name) {
-				ret = 'Unlike';
-				return;
-			}else {
-				ret = 'Like';
-				return;
-			}
-		});
-		return ret;
-	}*/
 });

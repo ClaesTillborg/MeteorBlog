@@ -14,8 +14,10 @@
 <!--Head template that changes.-->
 <template name="header">
 	<header>
+		<div class="floatRight">
+		{{loginButtons align="right"}}
+		</div>
 		<h1>{{header}}</h1>
-
 	</header>
 </template>
 
@@ -27,14 +29,15 @@
 
 <template name="blogPage">
 	
-	<aside class="three columns postLinkList">
-		{{loginButtons}}
+	<aside class="three columns">
 		<h3>Inlägg:</h3>
-		<ol>
-		{{#each postLinks}}
-			<li><a class="postLink" href="#{{_id}}">{{title}}</a></li>
-		{{/each}}
-		</ol>
+		<div class="postLinkList">
+			<ul>
+			{{#each postLinks}}
+				<li><a class="postLink" href="#{{_id}}">{{title}}</a></li>
+			{{/each}}
+			</ul>
+		</div>
 	</aside>
 
 	<section class="thirteen columns">
@@ -57,15 +60,16 @@
 					<dl>
 					  <dt>Publicerad:</dt>
 					    <dd>{{formatDate date}}</dd>
+					    <br>
 					  <dt>Författare:</dt>
 					    <dd>{{userName}}</dd>
-					  <dt>Kommentarer:</dt>
-					  	<dd>{{totalComments}} kommentarer</dd>
-				  	<dt>{{#if currentUser}}
-				  		<a href="#" class="{{likeUnlike}}_link" title="{{likeUnlike}}">{{likeUnlike}}</a>
-				  	{{/if}}</dt>
-				  		<dd>{{likeCount}}</dd>
+					    <br>
+					    {{totalComments}}					  	
 					</dl>
+					{{likeCount}}
+					{{#if currentUser}}
+					{{likeUnlike}}
+			  	{{/if}}
 				</aside>
 
 				<article class="nine columns omega contentWraper">
@@ -77,7 +81,7 @@
 					{{#each comments}}
 						<div class="comment">
 							{{#if userComment}}
-							<span class="removeComment">remove</span>
+							<input type="button" class="removeComment" value="X">
 							{{/if}}
 							<p>
 								<strong>{{userName}}</strong>: {{content}}<span><br>
