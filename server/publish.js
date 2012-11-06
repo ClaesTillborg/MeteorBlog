@@ -1,6 +1,5 @@
-/*
-	Publishes the collections
- */
+/* Publicerar Collectioner
+====================================================*/
 
 Meteor.publish("posts", function() {
 	return Posts.find({});

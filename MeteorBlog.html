@@ -17,7 +17,7 @@
 		<div class="floatRight">
 		{{loginButtons align="right"}}
 		</div>
-		<h1>{{header}}</h1>
+		<h1>Meteor Blogg</h1>
 	</header>
 </template>
 
@@ -30,13 +30,13 @@
 <template name="blogPage">
 	
 	<aside class="three columns">
-		<h3>Inlägg:</h3>
 		<div class="postLinkList">
-			<ul>
+		<h3>Inlägg:</h3>
+			<ol>
 			{{#each postLinks}}
-				<li><a class="postLink" href="#{{_id}}">{{title}}</a></li>
+				<li class="postLink"><a href="#{{_id}}" title="{{title}}" alt="länk till {{title}}">{{title}}</a></li>
 			{{/each}}
-			</ul>
+			</ol>
 		</div>
 	</aside>
 
@@ -49,7 +49,7 @@
 		</div>
 		{{else}}
 		<div>
-			<p>Logga in för att lägga till poster!</p>
+			<p>Logga in för att lägga till poster och kommentera!</p>
 		</div>
 		{{/if}}
 		{{#each post}}
@@ -60,10 +60,8 @@
 					<dl>
 					  <dt>Publicerad:</dt>
 					    <dd>{{formatDate date}}</dd>
-					    <br>
 					  <dt>Författare:</dt>
 					    <dd>{{userName}}</dd>
-					    <br>
 					    {{totalComments}}					  	
 					</dl>
 					{{likeCount}}
@@ -92,7 +90,7 @@
 				</div>
 				{{#if currentUser}}
 				<div class="commentBox">
-					<input type="text" id="addToPost_{{_id}}" placeholder="Skriv kommentar..." />
+					<input type="text" class="commentTextBox" id="addToPost_{{_id}}" placeholder="Skriv kommentar..." />
 					<input type="button" class="addComment" value="skicka"/>
 				</div>		
 				{{/if}}

@@ -1,4 +1,4 @@
-/*
-	Subscribes to the collections
-*/
+/* Prenumerationer på collections
+====================================================*/
+
 Meteor.subscribe("posts");

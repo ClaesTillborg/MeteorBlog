@@ -17,6 +17,56 @@
 /* #Site Styles
 ================================================== */
 
+.active {
+  background: #F6F6F6;
+}
+h1 { font-size: 35px; line-height: 40px; margin-bottom: 10px; }
+h2 { font-size: 28px; line-height: 34px; margin-bottom: 8px; }
+h3 { font-size: 21px; line-height: 30px; margin-bottom: 4px; }
+h4 { font-size: 17px; line-height: 24px; }
+h5 { font-size: 14px; line-height: 21px; }
+h6 { font-size: 12px; line-height: 18px; }
+
+dl {
+	font-size: small;
+}
+dt {
+	font-weight: bold;
+}
+dd {
+	font-style: italic;
+}
+
+.comment {
+}
+
+.post {
+	margin-top: 20px;
+	padding-top: 20px;
+	border-top: 0.2em dashed gray;
+}
+.removeComment {
+	margin: 1em;
+	margin-top: 0.5em;
+	float: right;
+}
+.floatRight {
+	float: right;
+}
+
+.unlike_link:hover,
+.like_link:hover {
+	text-decoration: none;
+	color: #B6B6B6;
+}
+.unlike_link,
+.like_link {
+	text-decoration: underline;
+}
+.postLink {
+	font-size: smaller;
+	margin-bottom: 5px;
+}
 /* #Page Styles
 ================================================== */
 
