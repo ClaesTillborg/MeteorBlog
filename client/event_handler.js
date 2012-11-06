@@ -28,7 +28,7 @@ Template.blogPage.events({
   },
   //gillar och slutar gilla en bloggpost
   'click .like_link': function() {
-  	Posts.update({ _id: this._id }, { $addToSet: { likes: { userId: Meteor.userId(), userName: Meteor.user().profile.name }}});
+  	Posts.update({ _id: this._id }, { $addToSet: { likes: { userId: Meteor.userId(), userName: profileName() }}});
   },
   'click .unlike_link': function() {
   	Posts.update({ _id: this._id }, { $pull: { likes: { userId: Meteor.userId()}}});
@@ -43,7 +43,7 @@ Template.blogPage.events({
 var add = {
   // Hämtar titel och text, skapar ett post-objekt och lägger in den i databasen
   post: function() {
-  var title = document.getElementById("addPostTitle").value;
+    var title = document.getElementById("addPostTitle").value;
     var content = document.getElementById("addPostContent").value;
     if (title !== '' && content !== '') {
       Posts.insert(
@@ -51,7 +51,7 @@ var add = {
         "title" : title,
         "date" : new Date(),
         "userId" : Meteor.userId(),
-        "userName" : Meteor.user().profile.name,
+        "userName" : profileName(),
         "content" : content,
         "comments" : [],
         "likes" : []
@@ -70,7 +70,7 @@ var add = {
         content: text,
         date: date,
         userId: Meteor.userId(),
-        userName: Meteor.user().profile.name
+        userName: profileName()
       }
       Posts.update({ _id: post._id}, { $addToSet: { comments: comment }});
     };
@@ -95,3 +95,14 @@ function returnDate(d) {
 	return year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds;
 };
 
+var profileName = function() {
+  if(Meteor.userLoaded()) {
+    var user = Meteor.user();
+    
+    if (user.profile) {
+      return user.profile.name;
+    }
+    return user.emails[0].address;
+  };
+  return null;
+};
