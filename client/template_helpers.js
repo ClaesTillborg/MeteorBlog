@@ -57,7 +57,7 @@ Template.blogPage.helpers({
 				if(this.likes.length === 1) {
 					ret = "Du";
 				} else {
-					ret = "Du och " + this.likes.length + " till"
+					ret = "Du och " + (this.likes.length -1)+ " till"
 				}
 			} else {
 				ret = this.likes.length;
